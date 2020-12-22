@@ -1,19 +1,39 @@
 import StoreUtils from "./storage-utils";
+import UuidUtils from "./uuid-utils";
 
 function FactoryModel(prefix) {
     return {
+        scheme: `@${prefix}`,
+        
         getAll: () => {
             return StoreUtils.retrieveAll(`@${prefix}:`);
         },
 
-        getById: (uid) => {
+        getById: async (uid) => {
             const key = `@${prefix}:${uid}`;
-            return StoreUtils.retrieve(key);
+            const data = await StoreUtils.retrieve(key);
+            try {
+                return JSON.parse(data);
+            } catch (error) {
+                return data;
+            }
         },
 
-        save: (uid, data) => {
+        save: async (data) => {
+            const uid = UuidUtils.uuidv4();
             const key = `@${prefix}:${uid}`;
-            return StoreUtils.store(key, JSON.stringify(data));
+            const str = (typeof data === 'string') ? data : JSON.stringify(data);
+            try {
+                await StoreUtils.store(key, str);
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+            return {
+                ...data,
+                uid,
+                key,
+            }
         },
 
         update: (id, user) => {

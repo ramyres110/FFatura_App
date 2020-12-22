@@ -1,6 +1,4 @@
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
-import { KeyboardAvoidingView } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function store(key, value) {
     try {
@@ -21,14 +19,14 @@ async function retrieve(key) {
 }
 
 async function retrieveAll(prefix) {
-    return Promise((res, rej) => {
-        AsyncStorage.getAllKeys((error, keys) => {
-            if (!!error) {
-                return rej(error);
-            }
-            return res(keys.map(key => key.indexOf(prefix) > 0));
-        });
-    });
+    let keys = []
+    try {
+        keys = await AsyncStorage.getAllKeys()
+    } catch (e) {
+        // read key error
+        return null
+    }
+    return keys.filter(key => key.indexOf(prefix) > 0);
 }
 
 async function drop(key) {

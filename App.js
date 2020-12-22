@@ -1,53 +1,45 @@
+import React, { useState, useEffect } from 'react';
 
-import * as React from 'react';
-import { SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import UserProvider, { useUser } from './src/contexts/user-context'
+import AppLoading from 'expo-app-loading';
 
-import LoginScreen from './src/screens/Login';
-import RegisterScreen from './src/screens/Register';
-import ForgetScreen from './src/screens/Forget';
+import { Container } from 'native-base';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreen from './src/screens/Home';
+import UserProvider from './src/contexts/user-context'
 
-const Stack = createStackNavigator();
-
-function StackLogin() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Login" options={{ title: 'Login', headerShown: false }} component={LoginScreen} />
-      <Stack.Screen name="Register" options={{ title: 'Cadastro' }} component={RegisterScreen} />
-      <Stack.Screen name="Forget" options={{ title: 'Esqueci a senha' }} component={ForgetScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function StackApp() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function StackAuthentication() {
-  const { user } = useUser();
-
-  return (
-    <NavigationContainer>{(!user) ? <StackLogin /> : <StackApp />}</NavigationContainer>
-  );
-}
+import StackAuthentication from './src/stacks/authentication-stack';
 
 function App() {
-  return (
-    <UserProvider>
-      <SafeAreaView style={{ flex: 1 }}>
-        <StackAuthentication />
-      </SafeAreaView>
-    </UserProvider>
-  );
+	const [ready, setReady] = useState(false);
+
+	useEffect(() => {
+		Font.loadAsync({
+			Roboto: require('native-base/Fonts/Roboto.ttf'),
+			Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+			...Ionicons.font,
+		})
+			.then(() => {
+				setReady(true);
+			});
+	}, []);
+
+
+	if (!ready) {
+		return <AppLoading />
+	}
+
+	return (
+		<UserProvider>
+			<SafeAreaView style={{ flex: 1 }}>
+				<Container>
+					<StackAuthentication />
+				</Container>
+			</SafeAreaView>
+		</UserProvider>
+	);
 }
 
 export default App;

@@ -1,45 +1,87 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Button } from 'react-native';
-import { Formik } from 'formik';
+import React from "react";
+import { Alert } from "react-native";
+import { Formik } from "formik";
+import { Icon, Content, Form, Item, Input, Button, Text, View, Label } from "native-base";
 
+import Brand from "../../components/brand-component";
+
+import { useUser } from '../../contexts/user-context';
+
+import AlertElement from '../../elements/alert-element';
+import UserModel from "../../models/user-model";
 
 function LoginScreen({ navigation }) {
+    const { setUser } = useUser();
+
+    function handleOnSubmit(values) {
+        const { email, password } = values;
+        if (!email || !password) {
+            AlertElement.Warning('Informe o usuário e a senha para prosseguir!');
+            return false;
+        }
+
+        UserModel.getByEmailAndPass(email, password)
+            .then(user => {
+                if (!user) {
+                    //TODO ALERT
+                    return false;
+                }
+                setUser(user);
+                return true;
+            });
+    }
+
     return (
-        <View style={{ flex: 1, flexDirection: 'column' }}>
-            <Text>Login Screen</Text>
 
-            <Formik initialValues={{ email: '' }} onSubmit={values => console.log(values)}>
-                {({ handleChange, handleBlur, handleSubmit, values }) => (
-                    <View style={{ padding: 70 }}>
-                        <TextInput
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
-                            style={{ borderWidth: 1, borderColor: "#333", marginBottom: 10 }}
-                        />
-                        <TextInput
-                            onChangeText={handleChange('passaword')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
-                            style={{ borderWidth: 1, borderColor: "#333", marginBottom: 10 }}
-                        />
-                        <Button onPress={handleSubmit} title="Submit" />
-                    </View>
-                )}
-            </Formik>
+        <Content style={{ padding: 30 }}>
+            <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 50 }}>
+                <Brand />
+            </View>
 
-            <TouchableOpacity>
-                <Text>Login</Text>
-            </TouchableOpacity>
+            <Form style={{ marginTop: 50 }}>
+                <Formik initialValues={{ email: '', password: '' }} onSubmit={handleOnSubmit}>
+                    {({ handleChange, handleBlur, handleSubmit, values }) => (
+                        <View>
+                            <Item floatingLabel>
+                                <Label>Email</Label>
+                                <Input
+                                    onChangeText={handleChange('email')}
+                                    onBlur={handleBlur('email')}
+                                    value={values.email}
+                                    autoCompleteType="email"
+                                />
+                            </Item>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                <Text>Cadastrar-se</Text>
-            </TouchableOpacity>
+                            <Item floatingLabel style={{ marginTop: 15 }}>
+                                <Label>Senha</Label>
+                                <Input
+                                    onChangeText={handleChange('password')}
+                                    onBlur={handleBlur('password')}
+                                    value={values.password}
+                                    autoCompleteType="password"
+                                    secureTextEntry={true}
+                                />
+                            </Item>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Forget')}>
+                            <Button onPress={handleSubmit} block primary style={{ marginTop: 20 }}>
+                                <Icon name="log-in-outline" />
+                                <Text>Entrar</Text>
+                            </Button>
+                        </View>
+                    )}
+                </Formik>
+            </Form>
+
+            <Button block warning style={{ marginTop: 10 }} onPress={() => navigation.navigate('Forget')}>
+                <Icon name="help-circle-outline" />
                 <Text>Esqueci a senha</Text>
-            </TouchableOpacity>
-        </View>
+            </Button>
+
+            <Button block info style={{ marginTop: 50 }} onPress={() => navigation.navigate('Register')}>
+                <Icon style={{ color: "#fff" }} name="person-add-outline" />
+                <Text style={{ color: "#fff" }}>Cadastrar-me</Text>
+            </Button>
+        </Content>
     );
 }
 

@@ -4,11 +4,11 @@
     "slug": "ffaturamento",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/graph-money-icon/icon_512.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/graph-money-icon/icon_512.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fabc3d"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/graph-money-icon/icon_512.png",
+        "backgroundColor": "#fabc3d"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets./graph-money-icon./icon_ico.ico"
     }
   }
 }

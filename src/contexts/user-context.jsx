@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import UserModel from "../models/user-model";
 
 const UserContext = createContext(null);
 

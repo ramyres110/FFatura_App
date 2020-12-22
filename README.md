@@ -284,6 +284,17 @@ Tarefas empresariais:
 - [ ] Elaborar Orçamento Empresarial
 
 
+## Ferramentas
+- Expo <https://docs.expo.io/>
+- React Navigation <https://reactnavigation.org/>
+- Native Base <https://docs.nativebase.io/>
+- Ionicons <https://ionicons.com/>
+- AsyncStorage <https://react-native-async-storage.github.io/async-storage/>
+
+
+## Assets
+1. <https://www.iconfinder.com/icons/379341/graph_money_icon>
+
 ## Referências
 1. <https://www.heflo.com/pt-br/swot/o-que-e-analise-swot/>
 1. <https://www.treasy.com.br/blog/analise-pest/>
@@ -294,6 +305,7 @@ Tarefas empresariais:
 1. <https://pt.wikipedia.org/wiki/Teoria_cl%C3%A1ssica_da_administra%C3%A7%C3%A3o>
 1. <https://blog.contaazul.com/faturamento>
 1. <https://blog.contaazul.com/aprenda-a-gerenciar-a-comissao-de-vendedores-da-sua-empresa>
+
 
 ## Anotações
 ?? Analise P.E.S.T
