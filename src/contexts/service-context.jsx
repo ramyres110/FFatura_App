@@ -4,10 +4,10 @@ import ServiceModel from "../models/service-model";
 const ServiceContext = createContext(null);
 
 export default function ServiceProvider({ children }) {
-    const [service, setService] = useState(null);
+    const [services, setServices] = useState([]);
 
     return (
-        <ServiceContext.Provider value={{ service, setService }}>
+        <ServiceContext.Provider value={{ services, setServices }}>
             {children}
         </ServiceContext.Provider>
     );
@@ -16,6 +16,6 @@ export default function ServiceProvider({ children }) {
 export function useService() {
     const context = useContext(ServiceContext);
     if (!context) throw new Error("useService must be used within a ServiceProvider");
-    const { service, setService } = context;
-    return { service, setService };
+    const { services, setServices } = context;
+    return { services, setServices };
 }

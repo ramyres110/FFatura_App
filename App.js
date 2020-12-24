@@ -4,13 +4,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import AppLoading from 'expo-app-loading';
 
-import { Container } from 'native-base';
+import { Root, Container } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
 import UserProvider from './src/contexts/user-context'
 
 import StackAuthentication from './src/stacks/authentication-stack';
+
+import "./tools/asyncStorageTool";//TESTE
 
 function App() {
 	const [ready, setReady] = useState(false);
@@ -34,9 +36,11 @@ function App() {
 	return (
 		<UserProvider>
 			<SafeAreaView style={{ flex: 1 }}>
-				<Container>
-					<StackAuthentication />
-				</Container>
+				<Root>
+					<Container>
+						<StackAuthentication />
+					</Container>
+				</Root>
 			</SafeAreaView>
 		</UserProvider>
 	);

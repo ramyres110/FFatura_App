@@ -1,19 +1,38 @@
+import * as Promise from "bluebird";
+
 import StoreUtils from "./storage-utils";
 import UuidUtils from "./uuid-utils";
+import { extractIdFromKey } from "./commons-utils";
 
 function FactoryModel(prefix) {
     return {
         scheme: `@${prefix}`,
-        
-        getAll: () => {
-            return StoreUtils.retrieveAll(`@${prefix}:`);
+
+        getAll: async () => {
+            const list = await StoreUtils.retrieveAll(`@${prefix}:`);
+            const aux = [];
+            return Promise.each(list, async (key) => {
+                const data = await StoreUtils.retrieve(key);
+                const obj = JSON.parse(data);
+                aux.push({
+                    ...obj,
+                    uid: extractIdFromKey(key)
+                });
+            })
+                .then(() => {
+                    return aux;
+                })
         },
 
         getById: async (uid) => {
             const key = `@${prefix}:${uid}`;
             const data = await StoreUtils.retrieve(key);
             try {
-                return JSON.parse(data);
+                const obj = JSON.parse(data);
+                aux.push({
+                    ...obj,
+                    uid: extractIdFromKey(key)
+                });
             } catch (error) {
                 return data;
             }

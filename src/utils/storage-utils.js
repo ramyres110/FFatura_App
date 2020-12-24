@@ -21,12 +21,11 @@ async function retrieve(key) {
 async function retrieveAll(prefix) {
     let keys = []
     try {
-        keys = await AsyncStorage.getAllKeys()
+        keys = await AsyncStorage.getAllKeys();
     } catch (e) {
-        // read key error
         return null
     }
-    return keys.filter(key => key.indexOf(prefix) > 0);
+    return keys.filter(key => key.indexOf(prefix) >= 0);
 }
 
 async function drop(key) {

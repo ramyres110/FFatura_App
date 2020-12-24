@@ -4,18 +4,18 @@ import IncomesModel from "../models/income-model";
 const IncomeContext = createContext(null);
 
 export default function IncomeProvider({ children }) {
-    const [income, setIncome] = useState(null);
+    const [incomes, setIncomes] = useState([]);
 
     return (
-        <IncomeContext.Provider value={{ income, setIncome }}>
+        <IncomeContext.Provider value={{ incomes, setIncomes }}>
             {children}
         </IncomeContext.Provider>
     );
 }
 
-export function useIncome() {
+export function useIncomes() {
     const context = useContext(IncomeContext);
-    if (!context) throw new Error("useIncome must be used wihtin a IncomeProvider");
-    const { income, setIncome } = context;
-    return { income, setIncome };
+    if (!context) throw new Error("useIncomes must be used wihtin a IncomeProvider");
+    const { incomes, setIncomes } = context;
+    return { incomes, setIncomes };
 }

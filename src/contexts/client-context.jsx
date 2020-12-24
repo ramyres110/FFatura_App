@@ -1,21 +1,21 @@
 import React, { createContext, useState, useContext } from "react";
 import ClientModel from "../models/client-model";
 
-const ClientContext = createContext(null);
+const ClientContext = createContext([null]);
 
 export default function ClientProvider({ children }) {
-    const [client, setClient] = useState(null);
+    const [clients, setClients] = useState([]);
 
     return (
-        <ClientContext.Provider value={{ client, setClient }}>
+        <ClientContext.Provider value={{ clients, setClients }}>
             {children}
         </ClientContext.Provider>
     );
 }
 
-export function useClient() {
+export function useClients() {
     const context = useContext(ClientContext);
-    if (!context) throw new Error("useClient must be used within a ClientProvider");
-    const { client, setClient } = context;
-    return { client, setClient };
+    if (!context) throw new Error("useClients must be used within a ClientProvider");
+    const { clients, setClients } = context;
+    return { clients, setClients };
 }

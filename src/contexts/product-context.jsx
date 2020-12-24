@@ -4,10 +4,10 @@ import ProductModel from "../models/product-model";
 const ProductContext = createContext(null);
 
 export default function ProductProvider({ children }) {
-    const [product, setProduct] = useState(null);
+    const [products, setProducts] = useState([]);
 
     return (
-        <ProductContext.Provider value={{ product, setProduct }}>
+        <ProductContext.Provider value={{ products, setProducts }}>
             {children}
         </ProductContext.Provider>
     )
@@ -16,6 +16,6 @@ export default function ProductProvider({ children }) {
 export function useProduct() {
     const context = useContext(ProductContext);
     if (!context) throw new Error("useProduct must be used within a ProductProvider");
-    const { product, setProduct } = context;
-    return { product, setProduct };
+    const { products, setProducts } = context;
+    return { products, setProducts };
 }

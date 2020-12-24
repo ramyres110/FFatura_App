@@ -1,5 +1,4 @@
 import React from "react";
-import { Alert } from "react-native";
 import { Formik } from "formik";
 import { Icon, Content, Form, Item, Input, Button, Text, View, Label } from "native-base";
 
@@ -9,6 +8,8 @@ import { useUser } from '../../contexts/user-context';
 
 import AlertElement from '../../elements/alert-element';
 import UserModel from "../../models/user-model";
+
+import AuthenticationUtils from '../../utils/authenticaton-utils';
 
 function LoginScreen({ navigation }) {
     const { setUser } = useUser();
@@ -23,9 +24,10 @@ function LoginScreen({ navigation }) {
         UserModel.getByEmailAndPass(email, password)
             .then(user => {
                 if (!user) {
-                    //TODO ALERT
+                    AlertElement.Warning('Usuário ou senha inválidos!');
                     return false;
                 }
+                AuthenticationUtils.setAuthenticatedUser(user.uid);
                 setUser(user);
                 return true;
             });

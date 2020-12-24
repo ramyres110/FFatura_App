@@ -20,12 +20,14 @@ export default function StackAuthentication() {
             .then((user) => {
                 setUser(user);
                 setReady(true);
+                return !!user;
             })
     }, []);
 
     if (!ready) {
         return <AppLoading />
     }
+
     return (
         <NavigationContainer style={{ flex: 1 }}>
             {
