@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
-import { Icon, Content, Form, Item, Input, Button, Text, View, Label, Toast } from "native-base";
-import * as Yup from 'yup';
+import { Icon, Content, Form, Item, Input, Button, Text, View, Label } from "native-base";
 
 import { cryptograph } from "../../utils/commons-utils";
-
-import UserModel from '../../models/user-model';
+import { RegisterSchema } from '../../utils/schema-validations';
 
 import AlertElement from '../../elements/alert-element';
 
-const RegisterSchema = Yup.object().shape({
-    passwordCheck: Yup.string().required('Repita a senha para Confirmação de Senha'),
-    password: Yup.string().required('Informe uma senha!'),
-    phone: Yup.string().min(10, 'Informe o número com DDD').required('Required'),
-    email: Yup.string().email().required('Informe um Email válido!'),
-    name: Yup.string().required('Informe o Nome Completo!'),
-}, [])
+import UserModel from '../../models/user-model';
 
 const initialValues = {
     name: '',
@@ -35,11 +27,9 @@ function RegisterScreen({ navigation }) {
             .validate(values)
             .then(async (values) => {
                 setErrorText({});
-
                 if (values.password !== values.passwordCheck) {
                     throw { errors: ['A confirmação de senha está diferente!'], path: 'passwordCheck' };
                 }
-
                 values = {
                     ...values,
                     password: await cryptograph(values.password),
@@ -61,13 +51,7 @@ function RegisterScreen({ navigation }) {
                     input: err.path
                 };
                 setErrorText(message);
-                Toast.show({
-                    text: message.msg,
-                    buttonText: "Ok",
-                    position: "top",
-                    type: "warning",
-                    duration: 3000
-                });
+                AlertElement.ToastWarning(message.msg);
                 return false;
             });
     }

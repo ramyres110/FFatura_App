@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert } from "react-native";
+import { Toast } from "native-base";
 
 import * as App from '../../app.json';
 
@@ -32,4 +33,14 @@ function Question(message, buttons, options) {
     return AbstractAlert(message, buttons, options);
 }
 
-export default { Success, Information, Question, Warning, Error };
+function ToastWarning(message) {
+    Toast.show({
+        text: message,
+        buttonText: "Ok",
+        position: "top",
+        type: "warning",
+        duration: 3000
+    });
+}
+
+export default { Success, Information, Question, Warning, Error, ToastWarning };

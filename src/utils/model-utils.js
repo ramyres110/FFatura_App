@@ -29,12 +29,13 @@ function FactoryModel(prefix) {
             const data = await StoreUtils.retrieve(key);
             try {
                 const obj = JSON.parse(data);
-                aux.push({
+                return {
                     ...obj,
                     uid: extractIdFromKey(key)
-                });
+                };
             } catch (error) {
-                return data;
+                console.log(err);
+                return null;
             }
         },
 

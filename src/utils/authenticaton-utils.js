@@ -10,6 +10,7 @@ async function getAuthenticatedUser() {
     if (!user) {
         return null;
     }
+    console.log(user);
     return user;
 }
 
@@ -21,5 +22,6 @@ async function setAuthenticatedUser(userId) {
 async function logout() {
     return setAuthenticatedUser(null);
 }
+
 
 export default { getAuthenticatedUser, setAuthenticatedUser, logout }

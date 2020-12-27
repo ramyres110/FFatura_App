@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import AppLoading from 'expo-app-loading';
 
@@ -12,7 +12,7 @@ import UserProvider from './src/contexts/user-context'
 
 import StackAuthentication from './src/stacks/authentication-stack';
 
-import "./tools/asyncStorageTool";//TESTE
+import "./tools";//Comment or remove to production
 
 function App() {
 	const [ready, setReady] = useState(false);
@@ -35,13 +35,15 @@ function App() {
 
 	return (
 		<UserProvider>
-			<SafeAreaView style={{ flex: 1 }}>
-				<Root>
-					<Container>
-						<StackAuthentication />
-					</Container>
-				</Root>
-			</SafeAreaView>
+			<SafeAreaProvider>
+				<SafeAreaView style={{ flex: 1 }}>
+					<Root>
+						<Container>
+							<StackAuthentication />
+						</Container>
+					</Root>
+				</SafeAreaView>
+			</SafeAreaProvider>
 		</UserProvider>
 	);
 }

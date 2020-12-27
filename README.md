@@ -289,11 +289,14 @@ Tarefas empresariais:
 - React Navigation <https://reactnavigation.org/>
 - Native Base <https://docs.nativebase.io/>
 - Ionicons <https://ionicons.com/>
+- Material Icon <https://cdn.materialdesignicons.com/5.4.55/>
 - AsyncStorage <https://react-native-async-storage.github.io/async-storage/>
+- Regex <https://regexr.com/>
 
 
 ## Assets
 1. <https://www.iconfinder.com/icons/379341/graph_money_icon>
+
 
 ## Referências
 1. <https://www.heflo.com/pt-br/swot/o-que-e-analise-swot/>
