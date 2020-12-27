@@ -130,13 +130,14 @@ Ex:
         - Endereço
         - Profissão
         - Escolaridade
-        - Autônomo x Contratado
+        - *Autônomo x Contratado
     - Esqueceu a senha
         - Email
         - Telefone
     - Bootstrap (Tutorial e Configurações Iniciais)
     - App
         - Dashboard
+            - %% Meta
             - Total do Dia
             - Total do Mês
             - Ultimos lançamentos

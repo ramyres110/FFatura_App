@@ -1,4 +1,32 @@
 {
+  "version": "0.0.1",
+  "name": "ffaturamento",
+  "description": "App para faturamento de pessoa física comissionado.",
+  "keywords": [
+    "app",
+    "faturamento",
+    "react",
+    "react-native",
+    "expo"
+  ],
+  "homepage": "https://github.com/ramyres110/FFatura_App",
+  "bugs": "https://github.com/ramyres110/FFatura_App/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ramyres110/FFatura_App.git"
+  },
+  "license": "MIT",
+  "private": true,
+  "author": {
+    "name": "Ramyres Aquino",
+    "email": "ramyres90@gmail.com",
+    "url": "https://github.com/ramyres110"
+  },
+  "contributors": [
+    {
+      "name": "Weder Carlos"
+    }
+  ],
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -48,6 +76,5 @@
     "@babel/core": "~7.9.0",
     "jest-expo": "^40.0.1",
     "react-test-renderer": "^17.0.1"
-  },
-  "private": true
+  }
 }

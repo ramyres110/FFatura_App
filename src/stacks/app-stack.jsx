@@ -9,19 +9,36 @@ import { Colors } from '../utils/commons-utils';
 
 import AppHeader from '../components/appHeader-component';
 
+import GroupProvider from '../contexts/group-context';
 import BillingProvider from '../contexts/billing-context';
 import ClientProvider from '../contexts/client-context';
 import IncomeProvider from '../contexts/income-context';
 import ProductProvider from '../contexts/product-context';
 import ServiceProvider from '../contexts/service-context';
+import ContractorProvider from '../contexts/contractor-context';
+import GoalProvider from '../contexts/goal-context';
+
+import BootstrapScreen from '../screens/Bootstrap';
 
 import HomeScreen from '../screens/Home';
 import IncomeScreen from '../screens/Income';
 import BillingScreen from '../screens/Billing';
 import ExtrasScreen from '../screens/Extras';
 
+import ServiceScreen from '../screens/Service';
+import ProductScreen from '../screens/Product';
+import ClientScreen from '../screens/Client';
+import ContractorScreen from '../screens/Contractor';
+import GroupScreen from '../screens/Group';
+
+import GoalScreen from '../screens/Goal';
 import ProfileScreen from '../screens/Profile';
 import SettingsScreen from '../screens/Settings';
+
+import ManualScreen from '../screens/Manual';
+import FrequentAskQuestionScreen from '../screens/FrequentAskQuestion';
+import SupportScreen from '../screens/Support';
+import AboutScreen from '../screens/About';
 
 const Stack = createStackNavigator();
 const Tab2 = createMaterialBottomTabNavigator();
@@ -80,26 +97,63 @@ function TabNavigator({ navigation }) {
 	);
 }
 
+function AppNavigator() {
 
-export default function StackApp({ navigation }) {
 	return (
-		<BillingProvider>
-			<ClientProvider>
-				<IncomeProvider>
-					<ProductProvider>
-						<ServiceProvider>
-							<Stack.Navigator mode="modal">
+		<Stack.Navigator
+			mode="modal"
+			initialRouteName="Main"
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: Colors.darkBlue,
+				},
+				headerTintColor: '#fff',
+			}}
+		>
+			{/* TODO: Criar Bootrastap */}
+			<Stack.Screen name="Bootstrap" options={{ headerShown: false }} component={BootstrapScreen} />
 
-								<Stack.Screen name="Main" options={{ headerShown: false }} component={TabNavigator} />
+			{/*  */}
+			<Stack.Screen name="Main" options={{ headerShown: false }} component={TabNavigator} />
 
-								<Stack.Screen name="Profile" options={{ title: "Perfil" }} component={ProfileScreen} />
-								<Stack.Screen name="Settings" options={{ title: 'Configurações' }} component={SettingsScreen} />
+			{/*  */}
+			<Stack.Screen name="Service" options={{ title: 'Serviços' }} component={ServiceScreen} />
+			<Stack.Screen name="Product" options={{ title: 'Produtos' }} component={ProductScreen} />
+			<Stack.Screen name="Client" options={{ title: 'Clientes' }} component={ClientScreen} />
+			<Stack.Screen name="Contractor" options={{ title: 'Contratantes' }} component={ContractorScreen} />
+			<Stack.Screen name="Group" options={{ title: 'Grupos' }} component={GroupScreen} />
 
-							</Stack.Navigator>
-						</ServiceProvider>
-					</ProductProvider>
-				</IncomeProvider>
-			</ClientProvider>
-		</BillingProvider>
+			<Stack.Screen name="Goal" options={{ title: 'Metas' }} component={GoalScreen} />
+			<Stack.Screen name="Profile" options={{ title: "Perfil" }} component={ProfileScreen} />
+			<Stack.Screen name="Settings" options={{ title: 'Configurações' }} component={SettingsScreen} />
+
+			<Stack.Screen name="Manual" options={{ title: 'Manual' }} component={ManualScreen} />
+			<Stack.Screen name="FrequentAskQuestion" options={{ title: 'FAQ' }} component={FrequentAskQuestionScreen} />
+			<Stack.Screen name="Support" options={{ title: 'Suporte' }} component={SupportScreen} />
+			<Stack.Screen name="About" options={{ title: 'Sobre o App' }} component={AboutScreen} />
+
+		</Stack.Navigator>
+	);
+}
+
+export default function StackApp() {
+	return (
+		<GroupProvider>
+			<BillingProvider>
+				<ClientProvider>
+					<IncomeProvider>
+						<ProductProvider>
+							<ServiceProvider>
+								<ContractorProvider>
+									<GoalProvider>
+										<AppNavigator />
+									</GoalProvider>
+								</ContractorProvider>
+							</ServiceProvider>
+						</ProductProvider>
+					</IncomeProvider>
+				</ClientProvider>
+			</BillingProvider>
+		</GroupProvider>
 	);
 }

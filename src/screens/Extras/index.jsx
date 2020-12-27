@@ -22,42 +22,47 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Incomes') }}>
-                    <Left><MaterialCommunityIcons name="format-list-bulleted-triangle" size={26} /></Left>
+                    <Left><MaterialCommunityIcons name="format-list-bulleted-triangle" size={24} /></Left>
                     <Body><Text>Lançamentos</Text></Body>
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Billing') }}>
-                    <Left><MaterialCommunityIcons name="cash-register" size={26} /></Left>
+                    <Left><MaterialCommunityIcons name="cash-register" size={24} /></Left>
                     <Body><Text>Faturamentos</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { }}>
-                    <Left><MaterialCommunityIcons name="briefcase" size={26} /></Left>
+                <ListItem icon onPress={() => { navigation.navigate('Service') }}>
+                    <Left><Icon name="briefcase" style={{ width: 24 }} /></Left>
                     <Body><Text>Serviços</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { }}>
+                <ListItem icon onPress={() => { navigation.navigate('Product') }}>
                     <Left><Icon name="cart" /></Left>
                     <Body><Text>Produtos</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { }}>
+                <ListItem icon onPress={() => { navigation.navigate('Client') }}>
                     <Left><Icon name="people-circle-outline" /></Left>
                     <Body><Text>Clientes</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { }}>
-                    <Left><Icon name="business" /></Left>
+                <ListItem icon onPress={() => { navigation.navigate('Contractor') }}>
+                    <Left><Icon name="business" style={{ width: 24 }} /></Left>
                     <Body><Text>Contratantes</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { }}>
+                <ListItem icon onPress={() => { navigation.navigate('Group') }}>
                     <Left><Icon name="grid" /></Left>
                     <Body><Text>Grupos</Text></Body>
                 </ListItem>
 
                 <ListItem itemHeader first>
                     <Text>Configurações</Text>
+                </ListItem>
+
+                <ListItem icon onPress={() => { navigation.navigate('Goal') }}>
+                    <Left><Icon name="trophy-outline" style={{ width: 24 }} /></Left>
+                    <Body><Text>Metas</Text></Body>
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Profile') }}>
@@ -74,22 +79,22 @@ function ExtrasScreen({ navigation }) {
                     <Text>Ajuda</Text>
                 </ListItem>
 
-                <ListItem icon onPress={() => { navigation.navigate('Settings') }}>
+                <ListItem icon onPress={() => { navigation.navigate('Manual') }}>
                     <Left><Icon name="book" /></Left>
                     <Body><Text>Manual</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { navigation.navigate('Settings') }}>
+                <ListItem icon onPress={() => { navigation.navigate('FrequentAskQuestion') }}>
                     <Left><Icon name="help" /></Left>
                     <Body><Text>FAQ</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { navigation.navigate('Settings') }}>
-                    <Left><Icon name="call" /></Left>
+                <ListItem icon onPress={() => { navigation.navigate('Support') }}>
+                    <Left><Icon name="headset" style={{ width: 24 }} /></Left>
                     <Body><Text>Suporte</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { navigation.navigate('Settings') }}>
+                <ListItem icon onPress={() => { navigation.navigate('About') }}>
                     <Left><Icon name="flash" /></Left>
                     <Body><Text>Sobre o App</Text></Body>
                 </ListItem>
