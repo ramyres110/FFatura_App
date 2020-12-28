@@ -1,21 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function store(key, value) {
-    try {
-        return await AsyncStorage.setItem(key, value);
-    } catch (error) {
-        // Error saving data
-        return false;
-    }
+    return await AsyncStorage.setItem(key, value);
 }
 
 async function retrieve(key) {
-    try {
-        return await AsyncStorage.getItem(key);
-    } catch (error) {
-        // Error retrieving data
-        return null;
-    }
+    return await AsyncStorage.getItem(key);
 }
 
 async function retrieveAll(prefix) {
@@ -28,13 +18,12 @@ async function retrieveAll(prefix) {
     return keys.filter(key => key.indexOf(prefix) >= 0);
 }
 
-async function drop(key) {
-    try {
-        return await AsyncStorage.removeItem(key);
-    } catch (error) {
-        // Error retrieving data
-        return null;
-    }
+async function update(key, data) {
+    return await AsyncStorage.setItem(key, data);
 }
 
-export default { store, retrieve, retrieveAll, drop };
+async function drop(key) {
+    return await AsyncStorage.removeItem(key);
+}
+
+export default { store, retrieve, retrieveAll, drop, update };

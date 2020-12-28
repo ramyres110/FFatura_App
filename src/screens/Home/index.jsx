@@ -55,7 +55,7 @@ function HomeScreen({ navigation }) {
             </Card>
 
 
-            <Button large rounded block style={{ marginTop: 25, marginHorizontal: 30, backgroundColor: Colors.orange }}><Text>Adicionar Lançamento</Text></Button>
+            <Button rounded block style={{ marginTop: 25, marginHorizontal: 30, backgroundColor: Colors.orange }}><Text>Adicionar Lançamento</Text></Button>
 
         </Content>
     );

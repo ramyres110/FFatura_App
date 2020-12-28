@@ -56,12 +56,25 @@ function FactoryModel(prefix) {
             }
         },
 
-        update: (id, user) => {
-
+        update: async (uid, data) => {
+            const key = `@${prefix}:${uid}`;
+            const str = (typeof data === 'string') ? data : JSON.stringify(data);
+            try {
+                await StoreUtils.update(key, str);
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+            return {
+                ...data,
+                uid,
+                key,
+            }
         },
 
-        drop: (id) => {
-
+        drop: async (uid) => {
+            const key = `@${prefix}:${uid}`;
+            return StoreUtils.drop(key);
         }
     }
 }

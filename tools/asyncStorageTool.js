@@ -44,6 +44,13 @@ async function getUserByEmailAndPassErrado3() {
     return user;
 }
 
+
+async function deleteUser() {
+    const uid = 'c9df8861-7635-4934-aaf1-172850349fc2';//'e306c812-8b7c-4941-846c-987c53f698cf';
+    const resp = await UserModel.drop(uid);
+    return resp;
+}
+
 //(())
 let runCount = 0;
 async function run(func) {
@@ -56,12 +63,14 @@ async function run(func) {
 console.log('--- ASYNC STORAGE TOOLS ---');
 
 run(listAllUsers)
-run(listAllKeys)
-run(getUserById)
-run(getUserByEmailAndPass)
-run(getUserByEmailAndPassErrado)
-run(getUserByEmailAndPassErradoA)
-run(getUserByEmailAndPassErrado2)
-run(getUserByEmailAndPassErrado3)
+// run(listAllKeys)
+// run(getUserById)
+// run(getUserByEmailAndPass)
+// run(getUserByEmailAndPassErrado)
+// run(getUserByEmailAndPassErradoA)
+// run(getUserByEmailAndPassErrado2)
+// run(getUserByEmailAndPassErrado3)
+// run(getUserByEmailAndPassErrado3)
+run(deleteUser);
 
 export default { run }

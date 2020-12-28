@@ -37,12 +37,12 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Product') }}>
-                    <Left><Icon name="cart" /></Left>
+                    <Left><Icon name="cart" style={{ width: 24 }} /></Left>
                     <Body><Text>Produtos</Text></Body>
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Client') }}>
-                    <Left><Icon name="people-circle-outline" /></Left>
+                    <Left><Icon name="people-circle-outline" style={{ width: 24 }}/></Left>
                     <Body><Text>Clientes</Text></Body>
                 </ListItem>
 
@@ -52,7 +52,7 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Group') }}>
-                    <Left><Icon name="grid" /></Left>
+                    <Left><Icon name="grid" style={{ width: 25 }}/></Left>
                     <Body><Text>Grupos</Text></Body>
                 </ListItem>
 
@@ -66,12 +66,12 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Profile') }}>
-                    <Left><Icon name="person-circle-outline" /></Left>
+                    <Left><Icon name="person-circle-outline" style={{ width: 24 }}/></Left>
                     <Body><Text>Perfil</Text></Body>
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Settings') }}>
-                    <Left><Icon name="cog" /></Left>
+                    <Left><Icon name="cog" style={{ width: 24 }}/></Left>
                     <Body><Text>Configurações</Text></Body>
                 </ListItem>
 
@@ -80,12 +80,12 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Manual') }}>
-                    <Left><Icon name="book" /></Left>
+                    <Left><Icon name="book" style={{ width: 24 }}/></Left>
                     <Body><Text>Manual</Text></Body>
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('FrequentAskQuestion') }}>
-                    <Left><Icon name="help" /></Left>
+                    <Left><Icon name="help" style={{ width: 24 }}/></Left>
                     <Body><Text>FAQ</Text></Body>
                 </ListItem>
 
@@ -95,7 +95,7 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('About') }}>
-                    <Left><Icon name="flash" /></Left>
+                    <Left><Icon name="flash" style={{ width: 24 }}/></Left>
                     <Body><Text>Sobre o App</Text></Body>
                 </ListItem>
             </List>

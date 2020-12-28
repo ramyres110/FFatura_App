@@ -29,7 +29,19 @@ function Error(message, buttons, options) {
     return AbstractAlert(message, buttons, options);
 }
 
-function Question(message, buttons, options) {
+function Question(message, onPressYes, onPressNo, buttons, options) {
+    buttons = buttons || [
+        {
+            text: "Sim",
+            onPress: onPressYes,
+        },
+        {
+            text: "Não",
+            onPress: onPressNo,
+            style: "cancel"
+        }
+    ]
+    options = { cancelable: false, ...options };
     return AbstractAlert(message, buttons, options);
 }
 

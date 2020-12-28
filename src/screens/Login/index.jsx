@@ -51,6 +51,8 @@ function LoginScreen({ navigation }) {
                                     onBlur={handleBlur('email')}
                                     value={values.email}
                                     autoCompleteType="email"
+                                    textContentType="emailAddress"
+                                    keyboardType="email-address"
                                 />
                             </Item>
 
@@ -62,6 +64,7 @@ function LoginScreen({ navigation }) {
                                     value={values.password}
                                     autoCompleteType="password"
                                     secureTextEntry={true}
+                                    textContentType="newPassword"
                                 />
                             </Item>
 

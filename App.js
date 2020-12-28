@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import AppLoading from 'expo-app-loading';
 
@@ -35,15 +35,13 @@ function App() {
 
 	return (
 		<UserProvider>
-			<SafeAreaProvider>
-				<SafeAreaView style={{ flex: 1 }}>
-					<Root>
-						<Container>
-							<StackAuthentication />
-						</Container>
-					</Root>
-				</SafeAreaView>
-			</SafeAreaProvider>
+			<SafeAreaView style={{ flex: 1 }}>
+				<Root>
+					<Container>
+						<StackAuthentication />
+					</Container>
+				</Root>
+			</SafeAreaView>
 		</UserProvider>
 	);
 }
