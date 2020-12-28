@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/graph-money-icon/icon_512.png",
         "backgroundColor": "#fabc3d"
-      }
+      },
+      "package": "com.ramyres110.ffaturamento"
     },
     "web": {
       "favicon": "./assets./graph-money-icon./icon_ico.ico"
