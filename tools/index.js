@@ -1,2 +1,2 @@
-//  import "./asyncStorageTool";//TESTE
+import "./asyncStorageTool";//TESTE
 // import "./utilsTool";

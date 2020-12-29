@@ -39,6 +39,7 @@ import ManualScreen from '../screens/Manual';
 import FrequentAskQuestionScreen from '../screens/FrequentAskQuestion';
 import SupportScreen from '../screens/Support';
 import AboutScreen from '../screens/About';
+import ClientRegisterScreen from '../screens/Client/register';
 
 const Stack = createStackNavigator();
 const Tab2 = createMaterialBottomTabNavigator();
@@ -131,6 +132,9 @@ function AppNavigator() {
 			<Stack.Screen name="FrequentAskQuestion" options={{ title: 'FAQ' }} component={FrequentAskQuestionScreen} />
 			<Stack.Screen name="Support" options={{ title: 'Suporte' }} component={SupportScreen} />
 			<Stack.Screen name="About" options={{ title: 'Sobre o App' }} component={AboutScreen} />
+
+			{/*  */}
+			<Stack.Screen name="ClientRegister" options={{ title: 'Cadastro de Cliente' }} component={ClientRegisterScreen} />
 
 		</Stack.Navigator>
 	);

@@ -168,7 +168,7 @@ Ex:
                     - Obs
                     - *Leitor de Código de Barras
                     - *Leitor de QrCode
-                    - Anexos
+                    - *Anexos
                 - Serviço
                     - Serviço
                         - Grupo
@@ -222,10 +222,10 @@ Ex:
                         - Pagamento Com (Dinheiro, Cartão de Crédito, Cartão de Débito, Etc)
                         - Juros
                         - Comissão
-                    - CST
-                    - NCM
-                    - Código de Barras
-                    - QRCode
+                    - CST (Código de Situação Tributária)
+                    - NCM (Nomenclatura Comum do Mercosul)
+                    - *Código de Barras
+                    - *QRCode
             - Serviços
                 - Grupo
                     - Comissão

@@ -42,6 +42,12 @@ function FactoryModel(prefix) {
         save: async (data) => {
             const uid = UuidUtils.uuidv4();
             const key = `@${prefix}:${uid}`;
+            const d = {
+                ...data,
+                uid,
+                createdAt: new Date(),
+                changedAt: new Date(),
+            }
             const str = (typeof data === 'string') ? data : JSON.stringify(data);
             try {
                 await StoreUtils.store(key, str);
