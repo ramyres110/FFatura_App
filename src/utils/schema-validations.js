@@ -16,4 +16,15 @@ export const ProfileSchema = Yup.object()
         name: Yup.string().required('Informe o Nome Completo!'),
     }, []);
 
+export const GroupSchema = Yup.object()
+    .shape({
+        commission: Yup.number('Comissão deve ser um número!')
+            .min(0, 'A Porcentagem da Comissão não pode ser meno que 0!')
+            .max(100, 'A Porcentagem da Comissão não pode ser maior que 100!')
+            .required('Informe a Porcentagem da Comissão!'),
+        name: Yup.string().required('Informe o Nome!'),
+    }, []);
+
+export const GoalSchema = Yup.object().shape({});
+
 export default {};

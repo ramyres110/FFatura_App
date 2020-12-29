@@ -1,16 +1,17 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import { ScrollableTab, Tab, Tabs, Text } from 'native-base';
+import { useGoal } from '../../contexts/goal-context';
+import ListScreen from '../../components/listScreen-component';
 
-import { useUser } from '../../contexts/user-context';
-
-function GoalScreen() {
-    const { user } = useUser();
+function GoalScreen({ navigation }) {
+    const { goals } = useGoal();
 
     return (
-        <Fragment>
-
-        </Fragment>
+        <ListScreen
+            data={goals}
+            screenHandler="GoalRegister"
+            navigation={navigation}
+        />
     );
 }
 

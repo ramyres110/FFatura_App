@@ -10,7 +10,6 @@ async function getAuthenticatedUser() {
     if (!user) {
         return null;
     }
-    console.log(user);
     return user;
 }
 

@@ -1,17 +1,11 @@
 import React from 'react';
 
 import { Body, Button, Card, CardItem, Content, H1, Text } from 'native-base';
-
-import AuthenticationUtils from '../../utils/authenticaton-utils';
-
-import { useUser } from '../../contexts/user-context';
-
 import { ProgressBar } from 'react-native-paper';
+
 import { Colors } from '../../utils/commons-utils';
 
 function HomeScreen({ navigation }) {
-    const { user, setUser } = useUser();
-
     return (
         <Content style={{ padding: 10 }}>
             <Card>
@@ -54,8 +48,12 @@ function HomeScreen({ navigation }) {
                 </CardItem>
             </Card>
 
-
-            <Button rounded block style={{ marginTop: 25, marginHorizontal: 30, backgroundColor: Colors.orange }}><Text>Adicionar Lançamento</Text></Button>
+            <Button rounded block
+                onPress={() => { navigation.push('IncomeRegister') }}
+                style={{ marginTop: 25, marginHorizontal: 30, backgroundColor: Colors.orange }}
+            >
+                <Text>Adicionar Lançamento</Text>
+            </Button>
 
         </Content>
     );

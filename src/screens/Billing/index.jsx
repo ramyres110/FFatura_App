@@ -1,18 +1,20 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import { ScrollableTab, Tab, Tabs, Text } from 'native-base';
-
-import { useUser } from '../../contexts/user-context';
 import ListScreen from '../../components/listScreen-component';
 
-function BillingScreen() {
-    const { user } = useUser();
+import { useBillings } from "../../contexts/billing-context";
 
-    return (
-        <Fragment>
-            <ListScreen />
-        </Fragment>
-    );
+function BillingScreen({ navigation }) {
+    const { billings } = useBillings();
+
+    return (<ListScreen
+        data={billings}
+        screenHandler="BillingRegister"
+        navigation={navigation}
+        options={{
+            addBtnLabel: "Faturar Lançamentos",
+            addBtnIcon: "calculator"
+        }} />);
 }
 
 export default BillingScreen;

@@ -242,6 +242,8 @@ Ex:
                 - *Faturamento
                 - *Lucro
                 - *Qtd Vendas
+                - Dt Inicio
+                - Dt Fim
             - Aquivos
                 - Anexos
             - Configurações

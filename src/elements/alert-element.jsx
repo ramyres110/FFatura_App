@@ -7,7 +7,7 @@ import * as App from '../../app.json';
 function AbstractAlert(message, buttons, options) {
     const title = App.expo.name;
     buttons = buttons || [
-        { text: 'OK', onPress: () => console.log('OK Pressed') }
+        { text: 'OK', onPress: () => { } }
     ];
     options = { cancelable: true, ...options };
     return Alert.alert(title, message, buttons, options);

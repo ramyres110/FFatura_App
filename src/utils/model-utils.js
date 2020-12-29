@@ -42,13 +42,13 @@ function FactoryModel(prefix) {
         save: async (data) => {
             const uid = UuidUtils.uuidv4();
             const key = `@${prefix}:${uid}`;
-            const d = {
+            const prepared = {
                 ...data,
                 uid,
                 createdAt: new Date(),
                 changedAt: new Date(),
             }
-            const str = (typeof data === 'string') ? data : JSON.stringify(data);
+            const str = (typeof data === 'string') ? data : JSON.stringify(prepared);
             try {
                 await StoreUtils.store(key, str);
             } catch (err) {
@@ -63,8 +63,18 @@ function FactoryModel(prefix) {
         },
 
         update: async (uid, data) => {
+            if (!uid) {
+                return null;
+            }
             const key = `@${prefix}:${uid}`;
-            const str = (typeof data === 'string') ? data : JSON.stringify(data);
+            const old = await StoreUtils.retrieve(key)
+            const prepared = {
+                ...JSON.parse(old),
+                ...data,
+                uid,
+                changedAt: new Date(),
+            }
+            const str = (typeof data === 'string') ? data : JSON.stringify(prepared);
             try {
                 await StoreUtils.update(key, str);
             } catch (err) {

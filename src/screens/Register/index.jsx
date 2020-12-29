@@ -56,8 +56,6 @@ function RegisterScreen({ navigation }) {
             });
     }
 
-    UserModel.getAll().then(arr => console.log(arr));
-
     return (
         <Content>
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'stretch', padding: 20 }}>

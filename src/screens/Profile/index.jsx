@@ -51,7 +51,6 @@ function ProfileScreen({ navigation }) {
             ...user,
             ...values
         }
-        console.log(newData);
         return UserModel.update(user.uid, newData)
             .then((res) => {
                 if (!res) {

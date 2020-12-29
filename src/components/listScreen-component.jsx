@@ -4,15 +4,31 @@ import { Colors } from "../utils/commons-utils";
 
 // import { Container } from "./styles";
 
-function ListScreen({ data, onItemSelected, onNewClick, options }) {
-    console.log(data);
-
+function ListScreen({ data, onItemSelected, onNewClick, options, screenHandler, navigation, extraLeftComponent, extraRightComponent }) {
     const params = {
         label: 'name',
         icon: 'person',
         addBtnLabel: 'Adicionar',
         addBtnIcon: 'add',
         ...options
+    }
+
+    function onItemPress(item) {
+        if (!!onItemSelected) {
+            onItemSelected(item);
+        }
+        if (!!screenHandler && !!navigation) {
+            navigation.push(screenHandler, item);
+        }
+    }
+
+    function btnPress() {
+        if (!!onNewClick) {
+            onNewClick();
+        }
+        if (!!screenHandler && !!navigation) {
+            navigation.push(screenHandler);
+        }
     }
 
     return (
@@ -26,18 +42,19 @@ function ListScreen({ data, onItemSelected, onNewClick, options }) {
                     <List style={{ paddingTop: 10 }}>
                         {
                             data.map((item) =>
-                                <ListItem key={item.uid} icon onPress={() => { onItemSelected(item) }}>
+                                <ListItem key={item.uid} icon onPress={() => { onItemPress(item) }}>
                                     {
                                         (!!params.icon) &&
                                         <Left icon >
-                                            <Icon name={params.icon} />
+                                            <Icon name={params.icon} style={{ width: 26 }} />
                                         </Left>
                                     }
-
+                                    {(!!extraLeftComponent) && extraLeftComponent(item)}
                                     <Body >
                                         <Text>{item[params.label]}</Text>
                                     </Body>
                                     <Right>
+                                        {(!!extraRightComponent) && extraRightComponent(item)}
                                         <Icon name="arrow-forward" />
                                     </Right>
                                 </ListItem>
@@ -46,7 +63,7 @@ function ListScreen({ data, onItemSelected, onNewClick, options }) {
                     </List>
             }
 
-            <Button activeOpacity primary rounded style={{ position: "absolute", bottom: 5, right: 5, backgroundColor: Colors.orange }} onPress={onNewClick}>
+            <Button activeOpacity primary rounded style={{ position: "absolute", bottom: 5, right: 5, backgroundColor: Colors.orange }} onPress={btnPress}>
                 <Icon name={params.addBtnIcon} />
                 <Text>{params.addBtnLabel}</Text>
             </Button>

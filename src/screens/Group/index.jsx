@@ -1,15 +1,21 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Text } from 'native-base';
 
-import { ScrollableTab, Tab, Tabs, Text } from 'native-base';
-
-import { useGroup } from '../../contexts/group-context';
 import ListScreen from '../../components/listScreen-component';
 
-function GroupScreen() {
-    const { groups, setGroups } = useGroup();
+import { useGroup } from '../../contexts/group-context';
+
+function GroupScreen({ navigation }) {
+    const { groups } = useGroup();
 
     return (
-        <ListScreen data={groups} options={{icon:"grid"}}/>
+        <ListScreen
+            data={groups}
+            screenHandler="GroupRegister"
+            options={{ icon: "grid" }}
+            navigation={navigation}
+            extraRightComponent={(item) => <Text>{`${item.commission} % `}</Text>}
+        />
     );
 }
 
