@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import ProductModel from "../models/product-model";
 
-const ProductContext = createContext(null);
+const ProductContext = createContext([null]);
 
 export default function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
@@ -13,7 +13,7 @@ export default function ProductProvider({ children }) {
     )
 }
 
-export function useProduct() {
+export function useProducts() {
     const context = useContext(ProductContext);
     if (!context) throw new Error("useProduct must be used within a ProductProvider");
     const { products, setProducts } = context;

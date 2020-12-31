@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import GoalModel from "../models/goal-model";
 
-const GoalContext = createContext(null);
+const GoalContext = createContext([null]);
 
 export default function GoalProvider({ children }) {
     const [goals, setGoals] = useState([]);
@@ -13,7 +13,7 @@ export default function GoalProvider({ children }) {
     );
 }
 
-export function useGoal() {
+export function useGoals() {
     const context = useContext(GoalContext);
     if (!context) throw new Error("useGoal must be used wihtin a GoalProvider");
     const { goals, setGoals } = context;
