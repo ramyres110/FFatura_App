@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import GroupModel from "../models/group-model";
 
-const GroupContext = createContext([null]);
+const GroupContext = createContext(null);
 
 export default function GroupProvider({ children }) {
     const [groups, setGroups] = useState([]);

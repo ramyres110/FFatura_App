@@ -1,10 +1,14 @@
-import React, {createContext, useState, useContext} from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import ServiceModel from "../models/service-model";
 
-const ServiceContext = createContext([null]);
+const ServiceContext = createContext(null);
 
 export default function ServiceProvider({ children }) {
     const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        ServiceModel.getAll().then(ser => setServices(ser));
+    }, [services]);
 
     return (
         <ServiceContext.Provider value={{ services, setServices }}>

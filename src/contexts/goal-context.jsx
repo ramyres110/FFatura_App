@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import GoalModel from "../models/goal-model";
 
-const GoalContext = createContext([null]);
+const GoalContext = createContext(null);
 
 export default function GoalProvider({ children }) {
     const [goals, setGoals] = useState([]);

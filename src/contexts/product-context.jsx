@@ -1,10 +1,14 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import ProductModel from "../models/product-model";
 
-const ProductContext = createContext([null]);
+const ProductContext = createContext(null);
 
 export default function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        ProductModel.getAll().then(pro => setProducts(pro));
+    }, [products]);
 
     return (
         <ProductContext.Provider value={{ products, setProducts }}>

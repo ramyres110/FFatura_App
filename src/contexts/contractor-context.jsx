@@ -1,10 +1,14 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import ContractorModel from "../models/contractor-model";
 
-const ContractorContext = createContext([null]);
+const ContractorContext = createContext(null);
 
 export default function ContractorProvider({ children }) {
     const [contractors, setContractors] = useState([]);
+
+    useEffect(() => {
+        ContractorModel.getAll().then(ct => setContractors(ct));
+    }, [contractors]);
 
     return (
         <ContractorContext.Provider value={{ contractors, setContractors }}>
