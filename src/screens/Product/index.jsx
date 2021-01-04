@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
-
+import ListScreen from '../../components/listScreen-component';
 import { ScrollableTab, Tab, Tabs, Text } from 'native-base';
 
-import { useUser } from '../../contexts/user-context';
+import { useProducts } from '../../contexts/product-context';
 
-function ProductScreen() {
-    const { user } = useUser();
+function ProductScreen({ navigation }) {
+    const { products } = useProducts();
 
     return (
-        <Fragment>
-
-        </Fragment>
+        <ListScreen
+            data={products}
+            onItemSelected={() => { }}
+        />
     );
 }
 

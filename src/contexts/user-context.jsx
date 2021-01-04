@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
-const UserContext = createContext(null);
+const UserContext = createContext([null]);
 
 export default function UserProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -12,7 +12,7 @@ export default function UserProvider({ children }) {
     );
 }
 
-export function useUser() {
+export function useUsers() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useUser must be used within a UserProvider");
     const { user, setUser } = context;

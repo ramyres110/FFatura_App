@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import IncomesModel from "../models/income-model";
 
-const IncomeContext = createContext(null);
+const IncomeContext = createContext([null]);
 
 export default function IncomeProvider({ children }) {
     const [incomes, setIncomes] = useState([]);
