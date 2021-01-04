@@ -31,4 +31,25 @@ export const Colors = {
     lightBlue: "#21b2d1",
 }
 
+export function dateToDateBr(date) {
+    if (!(date instanceof Date)) {
+        date = new Date(date);
+    }
+    const d = date.toJSON();
+    let [year, month, day] = d.split('T')[0].split('-');
+    return `${day}/${month}/${year}`;
+}
+
+export function dateBrToDate(brdate) {
+    if (!brdate.match(/\d{2}\/\d{2}\/\d{4}/g)) {
+        return null;
+    }
+    let [dia, mes, ano] = brdate.split('/');
+    let d = new Date();
+    d.setDate(dia);
+    d.setMonth(parseInt(mes) - 1);
+    d.setFullYear(ano);
+    return d;
+}
+
 export default function () { }

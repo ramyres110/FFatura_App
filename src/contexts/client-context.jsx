@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import { useEffect } from "react";
 import ClientModel from "../models/client-model";
 
-const ClientContext = createContext([null]);
+const ClientContext = createContext(null);
 
 export default function ClientProvider({ children }) {
     const [clients, setClients] = useState([

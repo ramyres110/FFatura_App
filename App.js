@@ -12,8 +12,6 @@ import UserProvider from './src/contexts/user-context'
 
 import StackAuthentication from './src/stacks/authentication-stack';
 
-import "./tools";//Comment or remove to production
-
 function App() {
 	const [ready, setReady] = useState(false);
 

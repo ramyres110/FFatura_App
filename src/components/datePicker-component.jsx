@@ -1,41 +1,104 @@
-import React, { useState } from 'react';
-import { View, Button, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Input, View, Item, Label } from 'native-base';
+import { Field } from 'formik';
 
-export default DatePicker = () => {
-    const [date, setDate] = useState(new Date(1598051730000));
+const DatePicker = ({ name, onChangeText, onBlur, label, value }) => {
+    const [date, setDate] = useState((!value) ? new Date() : (value instanceof Date) ? value : new Date(value));
     const [show, setShow] = useState(false);
 
-    const onChange = (event, selectedDate) => {
+    const onChangeDate = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
+        console.log('asdasdasdasd');
         setDate(currentDate);
-    };
-
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
+        onChangeText(currentDate);
     };
 
     const showDatepicker = () => {
-        showMode('date');
+        setShow(true);
     };
 
     return (
         <View>
-            <View>
-                <Button onPress={showDatepicker} title="Show date picker!" />
-            </View>
-            {show && (
-                <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode="date"
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
+            <Item floatingLabel style={{ marginTop: 15 }}>
+                <Label>{label}</Label>
+                <Input
+                    name={name}
+                    onChangeText={() => { }}
+                    onBlur={onBlur}
+                    onTouchStart={() => showDatepicker()}
+                    value={date.toLocaleDateString()}
                 />
-            )}
-        </View>
+            </Item>
+            {
+                show && (
+                    <DateTimePicker
+                        value={date}
+                        mode="date"
+                        display="default"
+                        onChange={onChangeDate}
+                    />
+                )
+            }
+        </View >
     );
 };
+
+export default DatePicker;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

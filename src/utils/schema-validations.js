@@ -25,6 +25,13 @@ export const GroupSchema = Yup.object()
         name: Yup.string().required('Informe o Nome!'),
     }, []);
 
-export const GoalSchema = Yup.object().shape({});
+export const GoalSchema = Yup.object().shape({
+    dtEnd: Yup.string(),
+    dtInit: Yup.string(),
+    profit: Yup.number().min(0, 'Informe o valor para Lucro Total!').required('Informe o Lucro!'),
+    sales: Yup.number().min(0, 'Informe o valor para Total Vendas!').required('Informe o Total Vendas!'),
+    incomes: Yup.number().min(0, 'Informe o valor para Faturamento Total!').required('Informe o Faturamento Total!'),
+    name: Yup.string().required('Informe o Nome!'),
+});
 
 export default {};

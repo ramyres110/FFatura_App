@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { Icon, Item, Input, Button, Text, View, Label } from "native-base";
 
-
 import FormContent from '../../components/formContent-component';
 import { GoalSchema } from '../../utils/schema-validations';
 
@@ -10,6 +9,8 @@ import AlertElement from '../../elements/alert-element';
 
 import { useGoal } from '../../contexts/goal-context';
 import GoalModel from '../../models/goal-model';
+
+import { dateToDateBr, dateBrToDate } from '../../utils/commons-utils';
 
 const GoalRegisterScreen = ({ route, navigation }) => {
     const [errorText, setErrorText] = useState({});
@@ -21,7 +22,11 @@ const GoalRegisterScreen = ({ route, navigation }) => {
         GoalSchema.validate(values)
             .then(async (values) => {
                 if (!goalEdit) {
-                    const res = await GoalModel.save(values);
+                    const res = await GoalModel.save({
+                        ...values,
+                        dtEnd: dateBrToDate(values.dtEnd),
+                        dtInit: dateBrToDate(values.dtInit)
+                    });
                     if (!res) {
                         throw { errors: ['Não foi possível realizar o cadastro!'], path: '' };
                     }
@@ -59,14 +64,46 @@ const GoalRegisterScreen = ({ route, navigation }) => {
         });
     }
 
+    function formatDate(value, handler) {
+        //Format 27/03/2021
+        if (value.length > 10) {
+            return
+        }
+        if (value.length == 2) {
+            if (parseInt(value) > 31) {
+                handler('');
+                return;
+            }
+            value = value + '/';
+        }
+        if (value.length == 5) {
+            let m = value.split('/')[1];
+            if (parseInt(m) > 12) {
+                handler('');
+                return;
+            }
+            value = value + '/';
+        }
+        if (value.length == 10) {
+            let y = value.split('/')[2];
+            if (parseInt(y) < 1800 || parseInt(y) > 2150) {
+                handler('');
+                return;
+            }
+        }
+        handler(value);
+    }
+
     return (
         <FormContent>
             <Formik
                 initialValues={{
                     name: (!goalEdit) ? "" : goalEdit.name,
-                    incomes: (!goalEdit) ? "" : goalEdit.incomes,
-                    sales: (!goalEdit) ? "" : goalEdit.sales,
-                    profit: (!goalEdit) ? "" : goalEdit.profit,
+                    incomes: (!goalEdit) ? "" : goalEdit.incomes + '',
+                    sales: (!goalEdit) ? "" : goalEdit.sales + '',
+                    profit: (!goalEdit) ? "" : goalEdit.profit + '',
+                    dtInit: (!goalEdit) ? "" : dateToDateBr(goalEdit.dtInit),
+                    dtEnd: (!goalEdit) ? "" : dateToDateBr(goalEdit.dtEnd),
                 }}
                 onSubmit={handleOnSubmit}
             >
@@ -84,7 +121,7 @@ const GoalRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'name' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'name'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'incomes'}>
                             <Label>*Faturamento Total (R$)</Label>
                             <Input
                                 name="incomes"
@@ -98,7 +135,7 @@ const GoalRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'incomes' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'name'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'sales'}>
                             <Label>*Total Vendas (R$)</Label>
                             <Input
                                 name="sales"
@@ -112,7 +149,7 @@ const GoalRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'sales' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'name'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'profit'}>
                             <Label>*Lucro Total (R$)</Label>
                             <Input
                                 name="profit"
@@ -126,32 +163,30 @@ const GoalRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'profit' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'name'}>
-                            <Label>Data Inicial</Label>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'dtInit'} >
+                            <Label>Data Inicial (31/03/1999)</Label>
                             <Input
                                 name="dtInit"
-                                onChangeText={handleChange('dtInit')}
+                                onChangeText={(e) => formatDate(e, handleChange('dtInit'))}
                                 onBlur={handleBlur('dtInit')}
                                 value={values.dtInit}
-                                autoCompleteType="cc-number"
+                                autoCompleteType="cc-exp-year"
                                 textContentType="none"
                                 keyboardType="numeric"
                             />
-                            {errorText.input === 'dtInit' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'name'}>
-                            <Label>*Data Final</Label>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'dtInit'}>
+                            <Label>Data Final (31/03/1999)</Label>
                             <Input
                                 name="dtEnd"
-                                onChangeText={handleChange('dtEnd')}
+                                onChangeText={(e) => formatDate(e, handleChange('dtEnd'))}
                                 onBlur={handleBlur('dtEnd')}
                                 value={values.dtEnd}
-                                autoCompleteType="cc-number"
+                                autoCompleteType="cc-exp-year"
                                 textContentType="none"
                                 keyboardType="numeric"
                             />
-                            {errorText.input === 'dtEnd' && <Icon name='close-circle' />}
                         </Item>
 
                         <Button onPress={handleSubmit} block primary style={{ marginTop: 30 }}>
