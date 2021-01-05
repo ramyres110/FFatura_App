@@ -21,12 +21,12 @@ function ExtrasScreen({ navigation }) {
                     <Text> Cadastros </Text>
                 </ListItem>
 
-                <ListItem icon onPress={() => { navigation.navigate('Incomes') }}>
+                <ListItem icon onPress={() => { navigation.navigate('Incomes2') }}>
                     <Left><MaterialCommunityIcons name="format-list-bulleted-triangle" size={24} /></Left>
                     <Body><Text>Lançamentos</Text></Body>
                 </ListItem>
 
-                <ListItem icon onPress={() => { navigation.navigate('Billing') }}>
+                <ListItem icon onPress={() => { navigation.navigate('Billing2') }}>
                     <Left><MaterialCommunityIcons name="cash-register" size={24} /></Left>
                     <Body><Text>Faturamentos</Text></Body>
                 </ListItem>
@@ -42,7 +42,7 @@ function ExtrasScreen({ navigation }) {
                 </ListItem>
 
                 <ListItem icon onPress={() => { navigation.navigate('Client') }}>
-                    <Left><Icon name="people-circle-outline" style={{ width: 24 }}/></Left>
+                    <Left><Icon name="people" style={{ width: 24 }}/></Left>
                     <Body><Text>Clientes</Text></Body>
                 </ListItem>
 

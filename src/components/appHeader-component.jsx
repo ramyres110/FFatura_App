@@ -51,14 +51,14 @@ export default function AppHeader({ navigation }) {
                 <Button transparent><Icon name='menu' /></Button>
             </Left> */}
             <Body>
-                <Title>Olá, {user.name.split(' ')[0]}</Title>
+                <Title style={{ color: "white" }}>Olá, {user.name.split(' ')[0]}</Title>
             </Body>
             <Right>
                 <Button transparent onPress={onPressProfile}>
-                    <Icon name='person-circle-outline' />
+                    <Icon name='person-circle-outline' style={{ color: "white" }} />
                 </Button>
                 <Button transparent onPress={onPressMore}>
-                    <Icon name='ellipsis-vertical' />
+                    <Icon name='ellipsis-vertical' style={{ color: "white" }} />
                 </Button>
             </Right>
         </Header>

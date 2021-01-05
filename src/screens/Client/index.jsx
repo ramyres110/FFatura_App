@@ -14,6 +14,7 @@ function ClientScreen({ navigation }) {
             data={clients}
             onItemSelected={(item) => { navigation.push('ClientRegister', item) }}
             onNewClick={() => { navigation.push('ClientRegister') }}
+            options={{ icon: "person" }}
         />
     );
 }

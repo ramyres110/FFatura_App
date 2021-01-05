@@ -121,6 +121,8 @@ function AppNavigator() {
 			<Stack.Screen name="Main" options={{ headerShown: false }} component={TabNavigator} />
 
 			{/*  */}
+			<Stack.Screen name="Billing2" options={{ title: 'Faturamento' }} component={IncomeScreen} />
+			<Stack.Screen name="Incomes2" options={{ title: 'Lançamentos' }} component={BillingScreen} />
 			<Stack.Screen name="Service" options={{ title: 'Serviços' }} component={ServiceScreen} />
 			<Stack.Screen name="Product" options={{ title: 'Produtos' }} component={ProductScreen} />
 			<Stack.Screen name="Client" options={{ title: 'Clientes' }} component={ClientScreen} />

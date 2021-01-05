@@ -12,8 +12,8 @@ function GroupScreen({ navigation }) {
         <ListScreen
             data={groups}
             screenHandler="GroupRegister"
-            options={{ icon: "grid" }}
             navigation={navigation}
+            options={{ icon: "grid" }}
             extraRightComponent={(item) => <Text>{`${item.commission} % `}</Text>}
         />
     );
