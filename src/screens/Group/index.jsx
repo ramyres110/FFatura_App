@@ -3,10 +3,10 @@ import { Text } from 'native-base';
 
 import ListScreen from '../../components/listScreen-component';
 
-import { useGroup } from '../../contexts/group-context';
+import { useGroups } from '../../contexts/group-context';
 
 function GroupScreen({ navigation }) {
-    const { groups } = useGroup();
+    const { groups } = useGroups();
 
     return (
         <ListScreen

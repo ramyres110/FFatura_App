@@ -8,12 +8,12 @@ import { GroupSchema } from '../../utils/schema-validations';
 
 import AlertElement from '../../elements/alert-element';
 
-import { useGroup } from '../../contexts/group-context';
+import { useGroups } from '../../contexts/group-context';
 import GroupModel from '../../models/group-model';
 
 const GroupRegisterScreen = ({ route, navigation }) => {
     const [errorText, setErrorText] = useState({});
-    const { groups, setGroups } = useGroup();
+    const { groups, setGroups } = useGroups();
 
     const groupEdit = route.params;
 

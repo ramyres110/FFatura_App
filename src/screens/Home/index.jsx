@@ -4,10 +4,10 @@ import { Body, Button, Card, CardItem, Content, H1, Text } from 'native-base';
 import { ProgressBar } from 'react-native-paper';
 
 import { Colors } from '../../utils/commons-utils';
-import { useGoal } from '../../contexts/goal-context';
+import { useGoals } from '../../contexts/goal-context';
 
 function HomeScreen({ navigation }) {
-    const { goals } = useGoal();
+    const { goals } = useGoals();
 
     function metaFilter(meta) {
         const dtEnd = new Date(meta.dtEnd);
