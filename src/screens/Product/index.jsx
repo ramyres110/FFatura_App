@@ -10,6 +10,9 @@ function ProductScreen({ navigation }) {
     return (
         <ListScreen
             data={products}
+            screenHandler="ProductRegister"
+            navigation={navigation}
+            options={{ icon: "trophy-outline" }}
             onItemSelected={() => { }}
         />
     );

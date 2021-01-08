@@ -36,6 +36,10 @@ export const GoalSchema = Yup.object().shape({
 
 export const ClientSchema = Yup.object().shape({
     name: Yup.string().required('Informe o Nome!'),
-})
+});
+
+export const ProductSchema = Yup.object().shape({
+    // productCode: Yup.number('Informe o código do produto!')
+});
 
 export default {};
