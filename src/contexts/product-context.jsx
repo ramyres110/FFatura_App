@@ -7,7 +7,7 @@ export default function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductModel.getAll().then(pro => setProducts(pro));
+        ProductModel.getAll().then((products) => setProducts(products));
     }, [products]);
 
     return (

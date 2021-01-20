@@ -125,7 +125,7 @@ function AppNavigator() {
 			<Stack.Screen name="Billing2" options={{ title: 'Faturamento' }} component={IncomeScreen} />
 			<Stack.Screen name="Incomes2" options={{ title: 'Lançamentos' }} component={BillingScreen} />
 			<Stack.Screen name="Service" options={{ title: 'Serviços' }} component={ServiceScreen} />
-			<Stack.Screen name="Product" options={{ title: 'Produtoss' }} component={ProductScreen} />
+			<Stack.Screen name="Product" options={{ title: 'Produtos' }} component={ProductScreen} />
 			<Stack.Screen name="Client" options={{ title: 'Clientes' }} component={ClientScreen} />
 			<Stack.Screen name="Contractor" options={{ title: 'Contratantes' }} component={ContractorScreen} />
 			<Stack.Screen name="Group" options={{ title: 'Grupos' }} component={GroupScreen} />

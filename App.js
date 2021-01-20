@@ -7,7 +7,6 @@ import AppLoading from 'expo-app-loading';
 import { Root, Container } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import './tools/asyncStorageTool'
 
 import UserProvider from './src/contexts/user-context'
 

@@ -38,8 +38,12 @@ export const ClientSchema = Yup.object().shape({
     name: Yup.string().required('Informe o Nome!'),
 });
 
-export const ProductSchema = Yup.object().shape({
-    // productCode: Yup.number('Informe o código do produto!')
-});
+export const ProductSchema = Yup.object()
+    .shape({
+        productCode: Yup.number('Informe o código do produto!').required('Informe o código do produto!'),
+        productDescription: Yup.string('Informe a descrição do produto!').required('Informe a descrição do produto!')
+    }, []);
+
+export const IncomeSchema = Yup.object().shape({});
 
 export default {};

@@ -3,60 +3,82 @@ import { Formik } from 'formik';
 import { Icon, Item, Input, Button, Text, View, Label } from 'native-base';
 
 import FormContent from '../../components/formContent-component';
+import SelectGroup from '../../components/groupSelect-component';
 import ProductModel from '../../models/product-model';
 
 import { ProductSchema } from '../../utils/schema-validations';
 
-import { AlertElement } from '../../elements/alert-element';
-
-
+import AlertElement from '../../elements/alert-element';
 import { useProducts } from '../../contexts/product-context';
+import { useGroups } from '../../contexts/group-context';
 
 const ProductRegisterScreen = ({ route, navigation }) => {
     const [errorText, setErrorText] = useState({});
     const { products, setProducts } = useProducts();
-
-    const productEdit = route.params;
-
-    function handleOnSubmit(values) {
-        ProductSchema.validate(values)
-        .then(async (values) => {
-            if (!productEdit) {
-                const res = await ProductModel.save(values);
-                if (!res) {
-                    throw { errors: ['Não foi possível realizar o cadastro!'], path: ''};
-                }
-                setProducts(products.concat(res));
-                AlertElement.Success('Cadastro realizado com sucesso!');
-            } else {
-                const res = await ProductModel.update(productEdit.uid, values);
-                if (!res) {
-                    throw { errors: ['Não foi possível realizar a alteração!'], path: ''};
-                }
-                setProducts(products.map(item => (item.uid != productEdit.uid) ? item : res));
-                AlertElement.Success('Alteração realizada com sucesso!');
-            }
-        })
+    const { groups } = useGroups();
+    
+    const productEdit = route.params;    
+    function handleOnSubmit(values) {        
+        // values.productGroup = getGroupById(values.productGroup);
+        // ProductSchema.validate(values)
+        //     .then(async (values) => {
+        //         if (!productEdit) {
+        //             const res = await ProductModel.save(values);
+        //             if (!res) {
+        //                 throw { errors: ['Não foi possível realizar o cadastro!'], path: '' };
+        //             }
+        //             setProducts(products.concat(res));
+        //             AlertElement.Success('Cadastro realizado com sucesso!');
+        //         } else {
+        //             const res = await ProductModel.update(productEdit.uid, values);
+        //             if (!res) {
+        //                 throw { errors: ['Não foi possível realizar a alteração!'], path: '' };
+        //             }
+        //             setProducts(products.map(item => (item.uid != productEdit.uid) ? item : res));
+        //             AlertElement.Success('Alteração realizada com sucesso!');
+        //         }
+        //         navigation.goBack();
+        //         return true;
+        //     })
+        //     .catch(err => {
+        //         const message = {
+        //             msg: err.errors[0],
+        //             input: err.path
+        //         };
+        //         setErrorText(message);
+        //         AlertElement.ToastWarning(message.msg);
+        //         return false;
+        //     })
     }
 
     function deleteItem() {
+        AlertElement.Question(`Deseja realmente excluir o produto ${productEdit.productDescription}?`, async () => {
+            await ProductModel.drop(productEdit.uid);
+            AlertElement.Success('Exclusão realizada com sucesso!');
+            setProducts(products.filter(res => res.uid !== productEdit.uid));
+            navigation.goBack();
+            return true;
+        })
+    }
 
+    function getGroupById(groupuid) {
+        return groups.filter(group => group.uid === groupuid)[0];
     }
 
     return (
         <FormContent>
             <Formik
                 initialValues={{
-                    productCode: (!productEdit) ? "" : productEdit.productCode,
-                    productGroup: (!productEdit) ? "" : productEdit.productGroup,
+                    productCode: (!productEdit) ? "" : productEdit.productCode.toString(),
+                    productGroup: (productEdit) ? productEdit.productGroup.uid : (!groups.lenght) ? "" : groups[0].uid,
                     productDescription: (!productEdit) ? "" : productEdit.productDescription,
                     productBrand: (!productEdit) ? "" : productEdit.productBrand,
                     productUnit: (!productEdit) ? "" : productEdit.productUnit,
-                    productPrice: (!productEdit) ? "" : productEdit.productPrice,
-                    productMaxDiscount: (!productEdit) ? "" : productEdit.productMaxDiscount,
-                    productPaymentType: (!productEdit) ? "" : productEdit.productPaymentType,
-                    productCST: (!productEdit) ? "" : productEdit.productCST,
-                    productNCM: (!productEdit) ? "" : productEdit.productNCM,
+                    productPrice: (!productEdit) ? "" : productEdit.productPrice.toString(),
+                    productMaxDiscount: (!productEdit) ? "" : productEdit.productMaxDiscount.toString(),
+                    productPaymentType: (!productEdit) ? "" : productEdit.productPaymentType.toString(),
+                    productCST: (!productEdit) ? "" : productEdit.productCST.toString(),
+                    productNCM: (!productEdit) ? "" : productEdit.productNCM.toString(),
                 }}
                 onSubmit={handleOnSubmit}
             >
@@ -74,20 +96,21 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productCode' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productGroup'}>
-                            <Label>Grupo</Label>
-                            <Input
-                                name='productGroup'
-                                onChangeText={handleChange('productGroup')}
-                                onBlur={handleBlur('productGroup')}
-                                value={values.productGroup}
-                                keyboardType='default'
-                            />
-                            {errorText.input === 'productGroup' && <Icon name='close-circle' />}
-                        </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productDescription'}>
-                            <Label>Descrição</Label>
+                        <SelectGroup
+                            value={values.productGroup}
+                            onChangeText={(groupuid) => { 
+                                handleChange('productGroup')(groupuid);                                
+                                let group = getGroupById(groupuid);                                
+                                handleChange('productPrice')(group.commission + '')
+                                
+                            }}
+                            onBlur={handleBlur('productGroup')}
+                        />
+
+
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productDescription'}>
+                            <Label>*Descrição</Label>
                             <Input
                                 name='productDescription'
                                 onChangeText={handleChange('productDescription')}
@@ -98,19 +121,19 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productDescription' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productBrand'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productBrand'}>
                             <Label>Marca</Label>
                             <Input
                                 name='productBrand'
                                 onChangeText={handleChange('productBrand')}
                                 onBlur={handleBlur('productBrand')}
                                 value={values.productBrand}
-                                keyboardType='productBrand'
+                                keyboardType='default'
                             />
                             {errorText.input === 'productBrand' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productUnit'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productUnit'}>
                             <Label>Unidade</Label>
                             <Input
                                 name='productUnit'
@@ -122,7 +145,7 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productUnit' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productPrice'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productPrice'}>
                             <Label>Preço</Label>
                             <Input
                                 name='productPrice'
@@ -134,7 +157,7 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productPrice' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productMaxDiscount'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productMaxDiscount'}>
                             <Label>Desconto Máximo</Label>
                             <Input
                                 name='productMaxDiscount'
@@ -146,7 +169,7 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productMaxDiscount' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productPaymentType'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productPaymentType'}>
                             <Label>Tipo de Pagamento</Label>
                             <Input
                                 name='productPaymentType'
@@ -158,7 +181,7 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productPaymentType' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productCST'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productCST'}>
                             <Label>CST</Label>
                             <Input
                                 name='productCST'
@@ -170,7 +193,7 @@ const ProductRegisterScreen = ({ route, navigation }) => {
                             {errorText.input === 'productCST' && <Icon name='close-circle' />}
                         </Item>
 
-                        <Item floatingLabel style={{marginTop: 15}} error={errorText.input === 'productNCM'}>
+                        <Item floatingLabel style={{ marginTop: 15 }} error={errorText.input === 'productNCM'}>
                             <Label>NCM</Label>
                             <Input
                                 name='productNCM'

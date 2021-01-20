@@ -4,7 +4,7 @@ import { Colors } from "../utils/commons-utils";
 
 // import { Container } from "./styles";
 
-function ListScreen({ data, onItemSelected, onNewClick, options, screenHandler, navigation, extraLeftComponent, extraRightComponent }) {
+function ListScreen({ data, onItemSelected, onNewClick, options, screenHandler, navigation, extraLeftComponent, extraRightComponent }) {    
     const params = {
         label: 'name',
         icon: 'person',

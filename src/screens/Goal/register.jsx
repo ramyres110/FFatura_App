@@ -7,14 +7,14 @@ import { GoalSchema } from '../../utils/schema-validations';
 
 import AlertElement from '../../elements/alert-element';
 
-import { useGoal } from '../../contexts/goal-context';
+import { useGoals } from '../../contexts/goal-context';
 import GoalModel from '../../models/goal-model';
 
 import { dateToDateBr, dateBrToDate } from '../../utils/commons-utils';
 
 const GoalRegisterScreen = ({ route, navigation }) => {
     const [errorText, setErrorText] = useState({});
-    const { goals, setGoals } = useGoal();
+    const { goals, setGoals } = useGoals();
 
     const goalEdit = route.params;
 
