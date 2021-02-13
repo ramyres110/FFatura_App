@@ -19,7 +19,7 @@ export default function GroupProvider({ children }) {
 
 export function useGroups() {
     const context = useContext(GroupContext);
-    if (!context) throw new Error("useGroup must be used wihtin a GroupProvider");
+    if (!context) throw new Error("useGroup must be used within a GroupProvider");
     const { groups, setGroups } = context;
     return { groups, setGroups };
 }

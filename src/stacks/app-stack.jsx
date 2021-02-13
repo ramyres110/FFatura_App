@@ -45,6 +45,7 @@ import GroupRegisterScreen from '../screens/Group/register';
 import GoalRegisterScreen from '../screens/Goal/register';
 import IncomeRegisterScreen from '../screens/Income/register';
 import ServiceRegisterScreen from '../screens/Service/register';
+import ProductRegisterScreen from '../screens/Product/register';
 
 const Stack = createStackNavigator();
 const Tab2 = createMaterialBottomTabNavigator();
@@ -146,7 +147,7 @@ function AppNavigator() {
 			<Stack.Screen name="ClientRegister" options={{ title: 'Cadastro de Cliente' }} component={ClientRegisterScreen} />
 			<Stack.Screen name="GroupRegister" options={{ title: 'Cadastro de Grupo' }} component={GroupRegisterScreen} />
 			<Stack.Screen name="GoalRegister" options={{ title: 'Cadastro de Meta' }} component={GoalRegisterScreen} />
-
+			<Stack.Screen name="ProductRegister" options={{ title: 'Cadastro de Produto '}} component={ProductRegisterScreen} />
 		</Stack.Navigator>
 	);
 }
