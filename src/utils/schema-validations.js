@@ -40,4 +40,6 @@ export const ClientSchema = Yup.object().shape({
 
 export const IncomeSchema = Yup.object().shape({});
 
+export const ServiceSchema = Yup.object().shape({});
+
 export default {};

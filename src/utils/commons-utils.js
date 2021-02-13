@@ -41,6 +41,9 @@ export function dateToDateBr(date) {
 }
 
 export function dateBrToDate(brdate) {
+    if(brdate instanceof Date){
+        return brdate;
+    }
     if (!brdate.match(/\d{2}\/\d{2}\/\d{4}/g)) {
         return null;
     }
@@ -51,5 +54,20 @@ export function dateBrToDate(brdate) {
     d.setFullYear(ano);
     return d;
 }
+
+export const monthNames = [
+    'Janeiro', 
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro'
+]
 
 export default function () { }

@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Body, Button, Icon, Left, List, ListItem, Right, ScrollableTab, Tab, Tabs, Text, View } from "native-base";
 import { Colors } from "../utils/commons-utils";
+import ButtonFloat from "./buttonFloat-component";
 
 // import { Container } from "./styles";
 
@@ -63,10 +64,7 @@ function ListScreen({ data, onItemSelected, onNewClick, options, screenHandler, 
                     </List>
             }
 
-            <Button activeOpacity primary rounded style={{ position: "absolute", bottom: 5, right: 5, backgroundColor: Colors.orange }} onPress={btnPress}>
-                <Icon name={params.addBtnIcon} />
-                <Text>{params.addBtnLabel}</Text>
-            </Button>
+            <ButtonFloat label={params.addBtnLabel} onPress={btnPress} />
         </Fragment>
     );
 }
